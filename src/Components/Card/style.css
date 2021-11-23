@@ -1,0 +1,18 @@
+.ContainerCard {
+  width: 200px;
+  height: 250px;
+  background-position: center;
+  background-size: cover;
+  margin: 0 10px;
+}
+
+.ContainerCard .CardContent {
+  width: 100%;
+  height: 100%;
+}
+
+.ContainerCard .CardContent:hover {
+  background-color: rgba(0, 0, 0, 0.411);
+  cursor: pointer;
+}
+/*# sourceMappingURL=style.css.map */
