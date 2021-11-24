@@ -1,9 +1,9 @@
 .ContainerCard {
-  width: 200px;
+  width: calc(20% - 10px);
   height: 250px;
   background-position: center;
   background-size: cover;
-  margin: 0 10px;
+  margin: 5px 10px;
 
   .CardContent {
     width: 100%;
