@@ -6,12 +6,12 @@
   margin: 5px 10px;
 }
 
-.ContainerCard .CardContent {
+.ContainerCard img {
   width: 100%;
   height: 100%;
 }
 
-.ContainerCard .CardContent:hover {
+.ContainerCard img:hover {
   background-color: rgba(0, 0, 0, 0.411);
   cursor: pointer;
 }

@@ -1,13 +1,15 @@
 import "./style.css"
 
-const Card = ({image, selected, setSelected}) => {
+const Card = ({image, index, id, handle}) => {   
     return(
-        <div 
-            onClick={() => {setSelected(!selected)}} 
+        <div              
             className="ContainerCard" 
-            style={{backgroundImage:`url(${image})`}}
+            //style={{backgroundImage:`url(${image})`}}
         >
-            <div className="CardContent"></div>
+            <img 
+            src={image}
+            onClick={() => {handle(id)}} 
+            />            
         </div>
     )
 }
