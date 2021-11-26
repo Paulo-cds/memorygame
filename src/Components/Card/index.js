@@ -3,8 +3,7 @@ import "./style.css"
 const Card = ({image, id, handle, blocked}) => {   
     return(
         <div              
-            className="ContainerCard" 
-            //style={{backgroundImage:`url(${image})`}}
+            className="ContainerCard"             
         >
             <img 
             src={image}
