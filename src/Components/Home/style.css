@@ -35,6 +35,12 @@
   padding: 20px 10px;
 }
 
+@media (max-width: 768px) {
+  .Container .alignCards {
+    padding: 10px 0;
+  }
+}
+
 .Container .alignCards .acertou {
   position: absolute;
   z-index: 99;

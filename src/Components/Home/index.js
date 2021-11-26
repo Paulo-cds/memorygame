@@ -172,7 +172,7 @@ const Home = () => {
     const reload = () => {
       setTimeout(() => {
         window.location.reload()
-      }, 10000)
+      }, 5000)
     }
   
 
