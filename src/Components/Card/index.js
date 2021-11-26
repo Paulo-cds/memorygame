@@ -1,6 +1,6 @@
 import "./style.css"
 
-const Card = ({image, index, id, handle}) => {   
+const Card = ({image, id, handle, blocked}) => {   
     return(
         <div              
             className="ContainerCard" 
@@ -9,7 +9,12 @@ const Card = ({image, index, id, handle}) => {
             <img 
             src={image}
             onClick={() => {handle(id)}} 
-            />            
+            alt="card"
+            />
+            {
+                blocked && 
+                <div className="cardBlocked"></div>
+            }
         </div>
     )
 }

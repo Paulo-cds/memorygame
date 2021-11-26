@@ -4,14 +4,25 @@
   background-position: center;
   background-size: cover;
   margin: 5px 10px;
+  position: relative;
 
   img {
     width: 100%;
     height: 100%;
 
     &:hover {
-      background-color: rgba(0, 0, 0, 0.411);
+      background-color: rgba(0, 0, 0, 0.26);
       cursor: pointer;
     }
+  }
+
+  .cardBlocked {
+    position: absolute;
+    background-color: rgba(8, 8, 8, 0.411);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9;
   }
 }
