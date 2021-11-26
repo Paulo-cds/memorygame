@@ -163,8 +163,8 @@ const Home = () => {
     const finish = () => {
       reload()
       return(        
-        <div className="acertou">
-          <iframe title='winner' src="https://giphy.com/embed/xULW8CPwOHXPua8NTa" frameBorder="0" class="giphy-embed" allowFullScreen />
+        <div className='acertou'>
+          <img src="https://media3.giphy.com/media/xULW8CPwOHXPua8NTa/giphy.gif?cid=790b761188b4277baabfe69988358574b20ee40d892b52d4&rid=giphy.gif&ct=g" />
         </div>        
       )      
     }
