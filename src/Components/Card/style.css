@@ -26,12 +26,26 @@
   }
 }
 
-.ContainerCard img {
+.ContainerCard .image {
   width: 100%;
   height: 100%;
 }
 
-.ContainerCard img:hover {
+.ContainerCard .image:hover {
+  background-color: rgba(0, 0, 0, 0.26);
+  cursor: pointer;
+}
+
+.ContainerCard .rotate {
+  -webkit-transform: rotateY(360deg);
+          transform: rotateY(360deg);
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  width: 100%;
+  height: 100%;
+}
+
+.ContainerCard .rotate:hover {
   background-color: rgba(0, 0, 0, 0.26);
   cursor: pointer;
 }

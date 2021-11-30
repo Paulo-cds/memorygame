@@ -1,6 +1,6 @@
 import "./style.css"
 
-const Card = ({image, id, handle, blocked}) => {   
+const Card = ({image, id, handle, blocked, rotation}) => {          
     return(
         <div              
             className="ContainerCard"             
@@ -8,7 +8,8 @@ const Card = ({image, id, handle, blocked}) => {
             <img 
             src={image}
             onClick={() => {handle(id)}} 
-            alt="card"
+            alt="card"            
+            className={rotation ? 'rotate' : 'image'}
             />
             {
                 blocked && 

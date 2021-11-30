@@ -18,133 +18,161 @@ const Home = () => {
         name:  battlefield,
         id: 1,
         selected: false,
-        blocked: false
+        blocked: false,
+        rotation: false
       },
       {
         name:  farcry,
         id: 2,
         selected: false,
-        blocked: false
+        blocked: false,
+        rotation: false
       },
       {
         name:  fortnite,
         id: 3,
         selected: false,
-        blocked: false
+        blocked: false,
+        rotation: false
       },
       {
         name:  freefire,
         id: 4,
         selected: false,
-        blocked: false
+        blocked: false,
+        rotation: false
       },
       {
         name: gta,
         id: 5,
         selected: false,
-        blocked: false
+        blocked: false,
+        rotation: false
       },
       {
         name:  battlefield,
         id: 6,
         selected: false,
-        blocked: false
+        blocked: false,
+        rotation: false
       },
       {
         name:  farcry,
         id: 7,
         selected: false,
-        blocked: false
+        blocked: false,
+        rotation: false
       },
       {
         name:  fortnite,
         id: 8,
         selected: false,
-        blocked: false
+        blocked: false,
+        rotation: false
       },
       {
         name:  freefire,
         id: 9,
         selected: false,
-        blocked: false
+        blocked: false,
+        rotation: false
       },
       {
         name: gta,
         id: 10,
         selected: false,
-        blocked: false
+        blocked: false,
+        rotation: false
       }      
   ]
 
-  const handleRestart = (secondCard) => {    
+  const handleRestart = (secondCard) => {        
     if(firstCard === secondCard){
       const newCard = CardAleatorio.map((card) => {
         if (card.name === firstCard){            
           return{
             ...card,
             blocked: true,
-            selected: true
+            selected: true,
+            rotation: false 
           }
         }
         return card
       })      
       setCardAleatorio(newCard)
-      setPoints(points + 1) 
-      console.log('pontos = ',points)     
+      setPoints(points + 1)         
     } else {
-    setTimeout(() => {
-      setQtdCliques(0)
-      if(firstCard !== secondCard){       
-        const newCard = CardAleatorio.map((card) => {
-          if (card.selected === true && card.blocked === false){            
-            return{
-              ...card,
-              selected: false
+      setTimeout(() => {
+        setQtdCliques(0)
+        if(firstCard !== secondCard){       
+          const newCard = CardAleatorio.map((card) => {
+            if (card.selected === true && card.blocked === false){            
+              return{
+                ...card,
+                selected: false
+              }
             }
-          }
-          return card
-        })      
-        setCardAleatorio(newCard)         
-      }     
-    },1000)
+            return card
+          })      
+          setCardAleatorio(newCard)         
+        }     
+      },1000)
     }
-    setQtdCliques(0)
+    setQtdCliques(0)  
   }
 
-  const handleFlip = (id) => {          
-    setQtdCliques(qtdCliques + 1)   
-    let secondCard = ''
-     
+
+  const handleFlip = (id) => {     
+    setTimeout(() => {   
+      setQtdCliques(qtdCliques + 1)   
+      let secondCard = ''
+      
+      const newCard = CardAleatorio.map((card) => {
+        if (card.id === id){        
+          if(card.selected === true && card.blocked === false){          
+            return{
+              ...card,
+              selected: false            
+            }
+          } else {             
+            if(qtdCliques === 0){
+              setFirstCard(card.name)
+            } else {
+              if(qtdCliques === 1){
+                secondCard=card.name                      
+              }  
+            }           
+            return{
+              ...card,
+              selected: true
+            }
+          }                 
+        }
+        
+        return card
+      })  
+    
+      setCardAleatorio(newCard)  
+        
+      if(qtdCliques===1){
+        handleRestart(secondCard)
+      }    
+    
+    },250)          
+  }
+
+  const handleRotation = (id) => {
     const newCard = CardAleatorio.map((card) => {
       if (card.id === id){        
-        if(card.selected === true && card.blocked === false){          
-          return{
-            ...card,
-            selected: false            
-          }
-        } else {             
-          if(qtdCliques === 0){
-            setFirstCard(card.name)
-          } else {
-            if(qtdCliques === 1){
-              secondCard=card.name                      
-            }  
-          }           
-          return{
-            ...card,
-            selected: true
-          }
+        return{
+          ...card,
+          rotation: true            
         }                 
-      }
-      
+      }      
       return card
-    })  
-  
-    setCardAleatorio(newCard)  
-       
-    if(qtdCliques===1){
-      handleRestart(secondCard)
-    }    
+    })    
+    setCardAleatorio(newCard)     
+    handleFlip(id)
   }
 
      
@@ -185,9 +213,10 @@ const Home = () => {
               <Card 
                   image={Cardd.selected ? Cardd.name : duvida} 
                   key={index}
-                  handle={handleFlip}
+                  handle={handleRotation}
                   id={Cardd.id}
                   blocked={Cardd.blocked}
+                  rotation={Cardd.rotation}                  
               />
             ))           
         }    
