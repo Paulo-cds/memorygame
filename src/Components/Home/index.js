@@ -1,90 +1,19 @@
-import './style.css'
+import './style.scss'
 import {useState, useEffect} from 'react'
+import cardsData from '../../cardsData'
 import duvida from '../../Assets/duvida.jpg'
-import battlefield from '../../Assets/battlefield.jpg'
-import farcry from '../../Assets/farcry.jpg'
-import fortnite from '../../Assets/fortnite.jpg'
-import freefire from '../../Assets/freefire.jpg'
-import gta from '../../Assets/gta.jpg'
 import Card from '../Card'
+import Stopwatch from '../Stopwatch'
 
 const Home = () => {  
   const [points, setPoints] = useState(0)
   const [qtdCliques, setQtdCliques] = useState(0)  
   const [firstCard, setFirstCard] = useState()  
   const [CardAleatorio, setCardAleatorio] = useState([])
-  const Cards = [
-      {
-        name:  battlefield,
-        id: 1,
-        selected: false,
-        blocked: false,
-        rotation: false
-      },
-      {
-        name:  farcry,
-        id: 2,
-        selected: false,
-        blocked: false,
-        rotation: false
-      },
-      {
-        name:  fortnite,
-        id: 3,
-        selected: false,
-        blocked: false,
-        rotation: false
-      },
-      {
-        name:  freefire,
-        id: 4,
-        selected: false,
-        blocked: false,
-        rotation: false
-      },
-      {
-        name: gta,
-        id: 5,
-        selected: false,
-        blocked: false,
-        rotation: false
-      },
-      {
-        name:  battlefield,
-        id: 6,
-        selected: false,
-        blocked: false,
-        rotation: false
-      },
-      {
-        name:  farcry,
-        id: 7,
-        selected: false,
-        blocked: false,
-        rotation: false
-      },
-      {
-        name:  fortnite,
-        id: 8,
-        selected: false,
-        blocked: false,
-        rotation: false
-      },
-      {
-        name:  freefire,
-        id: 9,
-        selected: false,
-        blocked: false,
-        rotation: false
-      },
-      {
-        name: gta,
-        id: 10,
-        selected: false,
-        blocked: false,
-        rotation: false
-      }      
-  ]
+  const [finishim, setFinishim] = useState(false)
+  const [minute, setMinute] = useState(0)
+  const [second, setSecond] = useState(0)
+  
 
   const handleRestart = (secondCard) => {        
     if(firstCard === secondCard){
@@ -100,7 +29,7 @@ const Home = () => {
         return card
       })      
       setCardAleatorio(newCard)
-      setPoints(points + 1)         
+      setPoints(points + 1)
     } else {
       setTimeout(() => {
         setQtdCliques(0)
@@ -119,6 +48,9 @@ const Home = () => {
       },1000)
     }
     setQtdCliques(0)  
+    if(points === (cardsData.length/2)-1){      
+      setFinishim(true)
+    }
   }
 
 
@@ -139,7 +71,7 @@ const Home = () => {
               setFirstCard(card.name)
             } else {
               if(qtdCliques === 1){
-                secondCard=card.name                      
+                secondCard=card.name                                  
               }  
             }           
             return{
@@ -178,34 +110,48 @@ const Home = () => {
      
     useEffect(() => {
     // Loop em todos os elementos
-    for (let i = Cards.length - 1; i > 0; i--) {
+    for (let i = cardsData.length - 1; i > 0; i--) {
             // Escolhendo elemento aleatório
         const j = Math.floor(Math.random() * (i + 1));
         // Reposicionando elemento
-        [Cards[i], Cards[j]] = [Cards[j], Cards[i]];
+        [cardsData[i], cardsData[j]] = [cardsData[j], cardsData[i]];
     }
     // Retornando array com aleatoriedade
-    setCardAleatorio(Cards)
+    setCardAleatorio(cardsData)
     }, [])  
 
-    const finish = () => {
-      reload()
+    const finish = () => { 
+      setTimeout(() => {
+        window.location.reload()
+      }, 5000)         
       return(        
         <div className='acertou'>
-          <img src="https://media3.giphy.com/media/xULW8CPwOHXPua8NTa/giphy.gif?cid=790b761188b4277baabfe69988358574b20ee40d892b52d4&rid=giphy.gif&ct=g" />
+          <h3>Seu tempo foi:</h3>
+          <div className='result'>
+            <div className='numbers'>
+              <p>Minutos</p>
+              <p>{minute}</p>
+            </div>
+            <div className='numbers'>
+              <p>Segundos</p>
+              <p>{second}</p>
+            </div>
+          </div>
         </div>        
       )      
     }
 
-    const reload = () => {
-      setTimeout(() => {
-        window.location.reload()
-      }, 5000)
-    }
   
 
   return (
     <div className="Container">
+      <Stopwatch 
+        finishim={finishim} 
+        minute={minute}
+        setMinute={setMinute}
+        second={second}
+        setSecond={setSecond}
+      />
       <div className="alignCards">        
         {
           CardAleatorio.length > 0 && 
@@ -221,9 +167,9 @@ const Home = () => {
             ))           
         }    
         {
-          points === (Cards.length/2) &&
+          points === (cardsData.length/2) &&
             finish()
-        }                         
+        }                      
       </div>
     </div>
   );

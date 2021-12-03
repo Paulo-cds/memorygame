@@ -31,12 +31,31 @@
       z-index: 99;
       top: 0;
       left: 0;
-      background-color: rgba(0, 0, 0, 0.301);
+      background-color: rgba(0, 0, 0, 0.445);
       width: 100%;
       min-height: 100vh;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
+      color: white;
+
+      h3 {
+        font-size: 2em;
+      }
+
+      .result {
+        display: flex;
+        text-align: center;
+
+        .numbers {
+          margin: 0 10px;
+        }
+
+        p {
+          font-size: 1.5em;
+        }
+      }
     }
   }
 }
