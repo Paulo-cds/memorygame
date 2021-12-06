@@ -31,7 +31,8 @@
       z-index: 99;
       top: 0;
       left: 0;
-      background-color: rgba(0, 0, 0, 0.445);
+      background-color: rgba(0, 0, 0, 0.363);
+      backdrop-filter: blur(10px);
       width: 100%;
       min-height: 100vh;
       display: flex;

@@ -8,11 +8,12 @@ import Stopwatch from '../Stopwatch'
 const Home = () => {  
   const [points, setPoints] = useState(0)
   const [qtdCliques, setQtdCliques] = useState(0)  
-  const [firstCard, setFirstCard] = useState()  
+  const [firstCard, setFirstCard] = useState() 
+  const [firstId, setFirstId]  = useState()
   const [CardAleatorio, setCardAleatorio] = useState([])
   const [finishim, setFinishim] = useState(false)
   const [minute, setMinute] = useState(0)
-  const [second, setSecond] = useState(0)
+  const [second, setSecond] = useState(0)  
   
 
   const handleRestart = (secondCard) => {        
@@ -30,6 +31,7 @@ const Home = () => {
       })      
       setCardAleatorio(newCard)
       setPoints(points + 1)
+      setQtdCliques(0)
     } else {
       setTimeout(() => {
         setQtdCliques(0)
@@ -45,85 +47,83 @@ const Home = () => {
           })      
           setCardAleatorio(newCard)         
         }     
+        setQtdCliques(0)
       },1000)
     }
-    setQtdCliques(0)  
+      
     if(points === (cardsData.length/2)-1){      
       setFinishim(true)
     }
   }
 
 
-  const handleFlip = (id) => {     
+  const handleFlip = (id) => {             
     setTimeout(() => {   
-      setQtdCliques(qtdCliques + 1)   
-      let secondCard = ''
       
+      let secondCard = ''
+            
       const newCard = CardAleatorio.map((card) => {
-        if (card.id === id){        
-          if(card.selected === true && card.blocked === false){          
-            return{
-              ...card,
-              selected: false            
-            }
-          } else {             
+        
+        if (card.id === id){                              
             if(qtdCliques === 0){
               setFirstCard(card.name)
+              setFirstId(id)
+              setQtdCliques(qtdCliques + 1)
             } else {
-              if(qtdCliques === 1){
-                secondCard=card.name                                  
+              if(qtdCliques > 0 && firstId !== id){
+                secondCard=card.name   
+                setQtdCliques(qtdCliques + 1)                               
               }  
             }           
             return{
               ...card,
               selected: true
-            }
-          }                 
-        }
+            }                          
+        }        
         
         return card
       })  
     
       setCardAleatorio(newCard)  
         
-      if(qtdCliques===1){
+      if(secondCard){
         handleRestart(secondCard)
       }    
     
-    },250)          
+    },250) 
+
   }
 
   const handleRotation = (id) => {
-    const newCard = CardAleatorio.map((card) => {
-      if (card.id === id){        
-        return{
-          ...card,
-          rotation: true            
-        }                 
-      }      
-      return card
-    })    
-    setCardAleatorio(newCard)     
-    handleFlip(id)
+    if(qtdCliques <=1){
+      const newCard = CardAleatorio.map((card) => {
+        if (card.id === id){        
+          return{
+            ...card,
+            rotation: true            
+          }                 
+        }      
+        return card
+      })    
+      setCardAleatorio(newCard)     
+      handleFlip(id)
+    }
   }
 
      
-    useEffect(() => {
-    // Loop em todos os elementos
-    for (let i = cardsData.length - 1; i > 0; i--) {
-            // Escolhendo elemento aleatório
-        const j = Math.floor(Math.random() * (i + 1));
-        // Reposicionando elemento
+    useEffect(() => {    
+    for (let i = cardsData.length - 1; i > 0; i--) {            
+        const j = Math.floor(Math.random() * (i + 1));        
         [cardsData[i], cardsData[j]] = [cardsData[j], cardsData[i]];
-    }
-    // Retornando array com aleatoriedade
+    }    
     setCardAleatorio(cardsData)
     }, [])  
 
     const finish = () => { 
+      window.scrollTo({top: 0,left: 0 , behavior: 'smooth'})
       setTimeout(() => {
         window.location.reload()
-      }, 5000)         
+      }, 5000)        
       return(        
         <div className='acertou'>
           <h3>Seu tempo foi:</h3>

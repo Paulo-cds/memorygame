@@ -13,36 +13,15 @@ const cardsData = [
     rotation: false
   },
   {
-    name:  farcry,
-    id: 2,
-    selected: false,
-    blocked: false,
-    rotation: false
-  },
-  {
-    name:  fortnite,
-    id: 3,
-    selected: false,
-    blocked: false,
-    rotation: false
-  },
-  {
-    name:  freefire,
-    id: 4,
-    selected: false,
-    blocked: false,
-    rotation: false
-  },
-  {
-    name: gta,
-    id: 5,
-    selected: false,
-    blocked: false,
-    rotation: false
-  },
-  {
     name:  battlefield,
     id: 6,
+    selected: false,
+    blocked: false,
+    rotation: false
+  },
+  {
+    name:  farcry,
+    id: 2,
     selected: false,
     blocked: false,
     rotation: false
@@ -56,7 +35,21 @@ const cardsData = [
   },
   {
     name:  fortnite,
+    id: 3,
+    selected: false,
+    blocked: false,
+    rotation: false
+  },
+  {
+    name:  fortnite,
     id: 8,
+    selected: false,
+    blocked: false,
+    rotation: false
+  },
+  {
+    name:  freefire,
+    id: 4,
     selected: false,
     blocked: false,
     rotation: false
@@ -68,6 +61,13 @@ const cardsData = [
     blocked: false,
     rotation: false
   },
+  {
+    name: gta,
+    id: 5,
+    selected: false,
+    blocked: false,
+    rotation: false
+  },        
   {
     name: gta,
     id: 10,

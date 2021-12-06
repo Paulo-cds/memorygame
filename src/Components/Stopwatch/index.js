@@ -6,7 +6,7 @@ const MyStopwatch = ({finishim, minute, setMinute, second, setSecond}) => {
   const watch = () => {
     setTimeout(() => {
     
-      if(second <= 59){
+      if(second < 59){
         setSecond(second+1)
       } else {
         setSecond(0)
